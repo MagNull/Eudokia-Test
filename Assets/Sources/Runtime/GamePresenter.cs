@@ -8,7 +8,6 @@ namespace Sources.Runtime
         private GameConfigs _gameConfigs;
         private GameView _gameView;
         private Game _game;
-        private MonstersSpawner _monstersSpawner;
 
         [Inject]
         private void Init(GameConfigs configs)
@@ -25,6 +24,13 @@ namespace Sources.Runtime
             
             _game.PointsChanged += _gameView.OnPointsChanged;
             _game.Lost += _gameView.OnLost;
+            _game.Lost += () =>
+            {
+                var monsters = FindObjectsOfType<MonsterClickable>();
+                foreach (var monster in monsters) 
+                    monster.Kill();
+                spawner.StopSpawn();
+            };
         }
 
         private void OnMonsterSpawned(MonsterClickable monster)

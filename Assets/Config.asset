@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dc2aa1724d48d096b445d40914e0d2, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  _monsterCountLoseCondition: 10
+  _monsterCountLoseCondition: 1
   _monstersHealth: 1
   _monsterSpeed: 5
   _maxMonsterSpeed: 10

@@ -33,7 +33,7 @@ namespace Sources.Runtime
         private void CheckLoseCondition()
         {
             if(_monstersCount >= _monsterCountLoseCondition)
-                Debug.Log("Lose");
+                Lost?.Invoke();
         }
     }
 }

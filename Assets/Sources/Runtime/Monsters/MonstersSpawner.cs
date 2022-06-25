@@ -21,6 +21,8 @@ namespace Sources.Runtime
         private ObjectPool<MonsterClickable> _monstersPool;
 
         public void FreezeSpawn() => StartCoroutine(PauseSpawn(_gameConfigs.FreezeDuration));
+
+        public void StopSpawn() => StopAllCoroutines();
         
         [Inject]
         private void Init(GameConfigs configs)
