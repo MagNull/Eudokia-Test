@@ -13,7 +13,19 @@ namespace Sources.Runtime
         [SerializeField]
         private float _monsterSpeed;
         [SerializeField]
+        private float _maxMonsterSpeed;
+        [SerializeField]
         private float _spawnInterval;
+        [SerializeField]
+        private float _minSpawnInterval;
+        
+        [Header("Difficulty configs")]
+        [SerializeField]
+        private float _monsterHealthPerSecond;
+        [SerializeField]
+        private float _monsterSpeedPerSecond;
+        [SerializeField]
+        private float _intervalReductionPerSecond;
 
         [Header("Freeze booster config")]
         [SerializeField]
@@ -37,5 +49,15 @@ namespace Sources.Runtime
         public float FreezeCooldown => _freezeCooldown;
 
         public float OverkillCooldown => _overkillCooldown;
+
+        public float MonsterHealthPerSecond => _monsterHealthPerSecond;
+
+        public float MonsterSpeedPerSecond => _monsterSpeedPerSecond;
+
+        public float IntervalReductionPerSecond => _intervalReductionPerSecond;
+
+        public float MinSpawnInterval => _minSpawnInterval;
+
+        public float MaxMonsterSpeed => _maxMonsterSpeed;
     }
 }

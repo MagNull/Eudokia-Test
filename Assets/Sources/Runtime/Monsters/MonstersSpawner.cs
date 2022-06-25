@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sources.Runtime.Utils;
 using UnityEngine;
+using VContainer;
 using Random = UnityEngine.Random;
 
 namespace Sources.Runtime
@@ -12,15 +13,20 @@ namespace Sources.Runtime
         public event Action<MonsterClickable> MonsterSpawned;
         [SerializeField]
         private MonstersFactory _monstersFactory;
-        [SerializeField]
         private GameConfigs _gameConfigs;
         [SerializeField]
         private Transform _spawnZone;
         private Coroutine _spawnCoroutine;
-        
+
         private ObjectPool<MonsterClickable> _monstersPool;
 
         public void FreezeSpawn() => StartCoroutine(PauseSpawn(_gameConfigs.FreezeDuration));
+        
+        [Inject]
+        private void Init(GameConfigs configs)
+        {
+            _gameConfigs = configs;
+        }
 
         private void Awake() => _monstersPool =
             new ObjectPool<MonsterClickable>(_gameConfigs.MonsterCountLoseCondition, _monstersFactory.Create);
@@ -31,7 +37,10 @@ namespace Sources.Runtime
         {
             while (true)
             {
-                yield return new WaitForSeconds(_gameConfigs.SpawnInterval);
+                var newSpawnInterval = _gameConfigs.SpawnInterval -
+                                       _gameConfigs.IntervalReductionPerSecond * Time.timeSinceLevelLoad;
+                newSpawnInterval = Mathf.Clamp(newSpawnInterval,_gameConfigs.MinSpawnInterval, Mathf.Infinity);
+                yield return new WaitForSeconds(newSpawnInterval);
                 SpawnMonster();
             }
         }
@@ -53,12 +62,6 @@ namespace Sources.Runtime
                         _spawnZone.position.y + _spawnZone.localScale.y / 2));
             monster.transform.position = randomPosition;
             MonsterSpawned?.Invoke(monster);
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(_spawnZone.position, _spawnZone.localScale);
         }
     }
 }

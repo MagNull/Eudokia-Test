@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sources.Runtime;
 using UnityEngine;
+using VContainer;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -15,9 +17,15 @@ public class MonsterMovement : MonoBehaviour
 
     private float _lastCollisionCheck = 0;
     private Rigidbody _rigidbody;
+    private GameConfigs _gameConfigs;
 
-    public void Init(float speed) => _movementSpeed = speed;
-    
+    [Inject]
+    private void Init(GameConfigs gameConfigs)
+    {
+        _gameConfigs = gameConfigs;
+        _movementSpeed = gameConfigs.MonsterSpeed;
+    }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -29,6 +37,14 @@ public class MonsterMovement : MonoBehaviour
     private void Update()
     {
         LookAtMovement();
+        UpdateSpeed();
+    }
+
+    private void UpdateSpeed()
+    {
+        _movementSpeed =
+            _gameConfigs.MonsterSpeed + _gameConfigs.MonsterSpeedPerSecond * Time.timeSinceLevelLoad;
+        _movementSpeed = Mathf.Clamp(_movementSpeed, 0, _gameConfigs.MaxMonsterSpeed);
     }
 
     private void OnCollisionStay(Collision collisionInfo)

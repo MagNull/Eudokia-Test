@@ -15,7 +15,12 @@ MonoBehaviour:
   _monsterCountLoseCondition: 10
   _monstersHealth: 1
   _monsterSpeed: 5
-  _spawnInterval: 1
+  _maxMonsterSpeed: 10
+  _spawnInterval: 2
+  _minSpawnInterval: 0.2
+  _monsterHealthPerSecond: 0.1
+  _monsterSpeedPerSecond: 0.1
+  _intervalReductionPerSecond: 0.05
   _freezeDuration: 3
   _freezeCooldown: 3
   _overkillCooldown: 3

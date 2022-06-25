@@ -22,7 +22,7 @@ namespace Sources.Runtime
             var monsters = GameObject.FindObjectsOfType<MonsterClickable>();
             foreach (var monster in monsters) 
                 monster.Kill();
-            Used?.Invoke(0, _gameConfigs.FreezeCooldown);
+            Used?.Invoke(0, _gameConfigs.OverkillCooldown);
         }
     }
 }

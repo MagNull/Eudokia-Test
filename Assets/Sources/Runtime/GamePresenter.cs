@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
+using VContainer;
 
 namespace Sources.Runtime
 {
     public class GamePresenter : MonoBehaviour
     {
-        [SerializeField]
-        private int _monsterCountLoseCondition = 10;
+        private GameConfigs _gameConfigs;
         private GameView _gameView;
         private Game _game;
         private MonstersSpawner _monstersSpawner;
 
+        [Inject]
+        private void Init(GameConfigs configs)
+        {
+            _gameConfigs = configs;
+        }
+        
         private void Awake()
         {
             _gameView = FindObjectOfType<GameView>();
-            _game = new Game(_monsterCountLoseCondition);
+            _game = new Game(_gameConfigs.MonsterCountLoseCondition);
             var spawner = FindObjectOfType<MonstersSpawner>();
             spawner.MonsterSpawned += OnMonsterSpawned;
             
