@@ -1,25 +1,33 @@
-﻿using System;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Sources.Runtime
 {
-    [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(BoosterView))]
     public class BoosterPresenter : MonoBehaviour
     {
         [SerializeReference]
         private IBooster _booster;
-        private Button _button;
+        private BoosterView _boosterView;
+        private TextMeshProUGUI _cooldownText;
 
         private void Awake()
         {
-            _button = GetComponent<Button>();
+            _boosterView = GetComponent<BoosterView>();
         }
 
-        private void Update() => _booster?.Update(Time.deltaTime);
+        private void OnEnable()
+        {
+            _boosterView.Clicked += _booster.Use;
+            _booster.Used += _boosterView.OnUsed;
 
-        private void OnEnable() => _button.onClick.AddListener(_booster.Use);
+        }
 
-        private void OnDisable() => _button.onClick.AddListener(_booster.Use);
+        private void OnDisable()
+        {
+            _boosterView.Clicked -= _booster.Use;
+            _booster.Used -= _boosterView.OnUsed;
+        }
     }
 }

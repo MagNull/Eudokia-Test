@@ -16,5 +16,6 @@ MonoBehaviour:
   _monstersHealth: 1
   _monsterSpeed: 5
   _spawnInterval: 1
-  _freezeDuration: 5
-  _freezeCooldown: 0
+  _freezeDuration: 3
+  _freezeCooldown: 3
+  _overkillCooldown: 3

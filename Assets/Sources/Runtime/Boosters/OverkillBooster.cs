@@ -7,8 +7,7 @@ namespace Sources.Runtime
     [Serializable]
     public class OverkillBooster : IBooster
     {
-        public event Action Used;
-        public event Action Cooldowned;
+        public event Action<float, float> Used;
         [SerializeField]
         private GameConfigs _gameConfigs;
         private Timer _timer;
@@ -23,10 +22,7 @@ namespace Sources.Runtime
             var monsters = GameObject.FindObjectsOfType<MonsterClickable>();
             foreach (var monster in monsters) 
                 monster.Kill();
-            Used?.Invoke();
-            _timer.Restart(_gameConfigs.OverkillCooldown, Cooldowned);
+            Used?.Invoke(0, _gameConfigs.FreezeCooldown);
         }
-
-        public void Update(float deltaTime) => _timer?.Tick(deltaTime);
     }
 }

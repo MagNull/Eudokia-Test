@@ -8,8 +8,7 @@ namespace Sources.Runtime
     [Serializable]
     public class FreezeBooster : IBooster
     {
-        public event Action Used;
-        public event Action Cooldowned;
+        public event Action<float, float> Used;
         [SerializeField]
         private GameConfigs _gameConfigs;
         private Timer _timer;
@@ -19,17 +18,12 @@ namespace Sources.Runtime
             _timer = new Timer();
         }
 
+
         public void Use()
         {
             var monsterSpawner = GameObject.FindObjectOfType<MonstersSpawner>();
             monsterSpawner.FreezeSpawn();
-            Used?.Invoke();
-            _timer.Restart(_gameConfigs.FreezeCooldown, Cooldowned);
-        }
-
-        public void Update(float deltaTime)
-        {
-            _timer?.Tick(deltaTime);
+            Used?.Invoke(_gameConfigs.FreezeDuration, _gameConfigs.FreezeCooldown);
         }
     }
 }

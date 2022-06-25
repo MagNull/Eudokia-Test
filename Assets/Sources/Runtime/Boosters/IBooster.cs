@@ -5,11 +5,8 @@ namespace Sources.Runtime
 {
     public interface IBooster
     {
-        public event Action Used;
-        public event Action Cooldowned;
+        public event Action<float, float> Used;
         
         void Use();
-
-        void Update(float deltaTime);
     }
 }
