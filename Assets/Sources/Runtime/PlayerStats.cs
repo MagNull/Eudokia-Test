@@ -8,11 +8,15 @@ namespace Sources.Runtime
     {
         [SerializeField]
         private float _clickDamage;
-        public int PlayerDamage => Mathf.FloorToInt(_clickDamage);
+        public int ClickDamage => Mathf.FloorToInt(_clickDamage);
+
+        public void IncreaseDamage(float value) => _clickDamage += value;
+
+        public void ReduceDamage(float value) => _clickDamage -= value;
     }
 
     public interface IReadonlyPlayerStats
     {
-        public int PlayerDamage { get; }
+        public int ClickDamage { get; }
     }
 }

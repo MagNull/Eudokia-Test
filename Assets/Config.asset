@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   _monsterCountLoseCondition: 10
-  _monstersHealth: 1
+  _monstersHealth: 2
   _monsterSpeed: 5
   _maxMonsterSpeed: 10
   _spawnInterval: 1
   _minSpawnInterval: 0.2
-  _healthPerSecond: 0.02
+  _healthPerSecond: 0
   _speedPerSecond: 0.1
   _intervalReductionPerSecond: 0.05
   _freezeDuration: 3
   _freezeCooldown: 3
   _overkillCooldown: 3
+  _damageCooldown: 5
+  _damageDuration: 2
+  _damageAmplify: 1

@@ -19,6 +19,7 @@ public class MonsterMovement : MonoBehaviour
     private float _lastCollisionCheck;
     private Rigidbody _rigidbody;
     private GameConfigs _gameConfigs;
+    private MonsterClickable _clickable;
 
     [Inject]
     private void Init(GameConfigs gameConfigs)
@@ -32,7 +33,7 @@ public class MonsterMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        GetComponent<MonsterClickable>().Died += OnDied;
+        _clickable = GetComponent<MonsterClickable>();
         enabled = false;
     }
 
@@ -75,10 +76,16 @@ public class MonsterMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        _clickable.Died += OnDied;
         UpdateSpeed();
         RandomizeSpeed();
         foreach (var collider in _colliders) 
             collider.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        _clickable.Died += OnDied;
     }
 
     private void FixedUpdate()

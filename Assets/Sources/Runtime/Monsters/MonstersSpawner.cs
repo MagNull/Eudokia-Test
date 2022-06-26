@@ -20,9 +20,9 @@ namespace Sources.Runtime
 
         private ObjectPool<MonsterClickable> _monstersPool;
 
-        public void FreezeSpawn() => StartCoroutine(PauseSpawn(_gameConfigs.FreezeDuration));
-
         public void StopSpawn() => StopAllCoroutines();
+
+        public void StartSpawn() => _spawnCoroutine = StartCoroutine(Spawning());
         
         [Inject]
         private void Init(GameConfigs configs)
@@ -33,7 +33,7 @@ namespace Sources.Runtime
         private void Awake() => _monstersPool =
             new ObjectPool<MonsterClickable>(_gameConfigs.MonsterCountLoseCondition, _monstersFactory.Create);
 
-        private void Start() => _spawnCoroutine = StartCoroutine(Spawning());
+        private void Start() => StartSpawn();
 
         private IEnumerator Spawning()
         {
@@ -47,13 +47,6 @@ namespace Sources.Runtime
             }
         }
 
-        private IEnumerator PauseSpawn(float duration)
-        {
-            StopCoroutine(_spawnCoroutine);
-            yield return new WaitForSeconds(duration);
-            _spawnCoroutine = StartCoroutine(Spawning());
-        }
-
         private void SpawnMonster()
         {
             var monster = _monstersPool.Get();
@@ -64,6 +57,12 @@ namespace Sources.Runtime
                         _spawnZone.position.y + _spawnZone.localScale.y / 2));
             monster.transform.position = randomPosition;
             MonsterSpawned?.Invoke(monster);
+        }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(_spawnZone.position, _spawnZone.localScale);
         }
     }
 }

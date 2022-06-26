@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using VContainer;
 
 namespace Sources.Runtime
 {
@@ -7,8 +8,13 @@ namespace Sources.Runtime
     public class OverkillBooster : IBooster
     {
         public event Action<float, float> Used;
-        [SerializeField]
         private GameConfigs _gameConfigs;
+        
+        [Inject]
+        public void Init(GameConfigs gameConfigs)
+        {
+            _gameConfigs = gameConfigs;
+        }
 
         public void Use()
         {

@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public void LoadMenu()
-    {
-        
-    }
+    private readonly string _menu = "Main menu";
+    private readonly string _game = "Game";
+
+    public void LoadMenu() => SceneManager.LoadSceneAsync(_menu);
+
+    public void LoadGame() => SceneManager.LoadSceneAsync(_game);
+
+    public void Exit() => Application.Quit();
 
     public void Restart() => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 }

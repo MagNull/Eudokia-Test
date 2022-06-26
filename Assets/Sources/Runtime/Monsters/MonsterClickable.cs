@@ -83,7 +83,7 @@ namespace Sources.Runtime
         {
             if (_health <= 0)
                 return;
-            TakeDamage(_playerStats.PlayerDamage);
+            TakeDamage(_playerStats.ClickDamage);
             transform.DOComplete();
             transform.DOPunchScale(_punchPower * Vector3.one, _punchDuration);
         }

@@ -54,6 +54,7 @@
   <ItemGroup>
      <Compile Include="Assets\Sources\Runtime\SceneLoader.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+     <Compile Include="Assets\Sources\Runtime\UI\ClickSound.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
      <Compile Include="Assets\Sources\Runtime\Monsters\MonstersSpawner.cs" />
@@ -65,14 +66,17 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
      <Compile Include="Assets\Sources\Runtime\Monsters\MonsterClickable.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+     <Compile Include="Assets\Sources\Runtime\Boosters\ScreenBoosterView.cs" />
      <Compile Include="Assets\Sources\Runtime\GameView.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\Sources\Runtime\Utils\IPoolObject.cs" />
+     <Compile Include="Assets\Sources\Runtime\Monsters\MonsterSound.cs" />
      <Compile Include="Assets\Sources\Runtime\Boosters\BoosterPresenter.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
      <Compile Include="Assets\Sources\Runtime\Utils\Timer.cs" />
      <Compile Include="Assets\Sources\Runtime\Boosters\BoosterView.cs" />
      <Compile Include="Assets\Sources\Runtime\GameLifetimeScope.cs" />
+     <Compile Include="Assets\Sources\Runtime\Utils\IDamageable.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
@@ -95,6 +99,8 @@
      <Compile Include="Assets\Sources\Externals\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Sources\Externals\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
      <Compile Include="Assets\Sources\Externals\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
+     <Compile Include="Assets\Sources\Runtime\UI\ClickShrink.cs" />
+     <Compile Include="Assets\Sources\Runtime\PlayerStats.cs" />
      <Compile Include="Assets\Sources\Externals\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
      <Compile Include="Assets\Sources\Externals\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
@@ -113,9 +119,8 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Sources\Runtime\Boosters\IBooster.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-     <Compile Include="Assets\Sources\Runtime\Utils\IDamageable.cs" />
-     <Compile Include="Assets\Sources\Runtime\PlayerStats.cs" />
-     <Compile Include="Assets\Sources\Runtime\Boosters\FreezeView.cs" />
+     <Compile Include="Assets\Sources\Runtime\Boosters\DamageBooster.cs" />
+     <Compile Include="Assets\Sources\Runtime\Utils\IUpdateable.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

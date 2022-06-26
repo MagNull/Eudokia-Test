@@ -35,6 +35,13 @@ namespace Sources.Runtime
         [Header("Overkill booster config")]
         [SerializeField]
         private float _overkillCooldown;
+        [Header("Damage booster config")]
+        [SerializeField]
+        private float _damageCooldown;
+        [SerializeField]
+        private float _damageDuration;
+        [SerializeField]
+        private float _damageAmplify;
 
         public int MonstersHealth => _monstersHealth;
 
@@ -59,5 +66,11 @@ namespace Sources.Runtime
         public float MinSpawnInterval => _minSpawnInterval;
 
         public float MaxMonsterSpeed => _maxMonsterSpeed;
+
+        public float DamageCooldown => _damageCooldown;
+
+        public float DamageDuration => _damageDuration;
+
+        public float DamageAmplify => _damageAmplify;
     }
 }
