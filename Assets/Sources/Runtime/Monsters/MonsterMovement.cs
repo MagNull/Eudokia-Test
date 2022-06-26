@@ -15,7 +15,7 @@ public class MonsterMovement : MonoBehaviour
     private float _collisionCheckCooldown = 1;
     private float _movementSpeed = 1;
 
-    private float _lastCollisionCheck = 0;
+    private float _lastCollisionCheck;
     private Rigidbody _rigidbody;
     private GameConfigs _gameConfigs;
 
@@ -24,27 +24,25 @@ public class MonsterMovement : MonoBehaviour
     {
         _gameConfigs = gameConfigs;
         _movementSpeed = gameConfigs.MonsterSpeed;
+        enabled = true;
     }
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        GetComponent<MonsterClickable>().Died += OnDied;
+        enabled = false;
     }
 
-    private void Start() => _rigidbody.velocity =
-        Quaternion.Euler(0, Random.Range(-360, 360), 0) * transform.forward * _movementSpeed;
+    private void RandomizeSpeed()
+    {
+        _rigidbody.velocity =
+            Quaternion.Euler(0, Random.Range(-360, 360), 0) * transform.forward * _movementSpeed;
+    }
 
     private void Update()
     {
         LookAtMovement();
-        UpdateSpeed();
-    }
-
-    private void UpdateSpeed()
-    {
-        _movementSpeed =
-            _gameConfigs.MonsterSpeed + _gameConfigs.MonsterSpeedPerSecond * Time.timeSinceLevelLoad;
-        _movementSpeed = Mathf.Clamp(_movementSpeed, 0, _gameConfigs.MaxMonsterSpeed);
     }
 
     private void OnCollisionStay(Collision collisionInfo)
@@ -59,12 +57,32 @@ public class MonsterMovement : MonoBehaviour
             Quaternion.Euler(0, rotationAngle, 0) * collisionInfo.GetContact(0).normal;
     }
 
-    private void FixedUpdate() => _rigidbody.velocity = _rigidbody.velocity.normalized * _movementSpeed;
+    private void OnDied() => _movementSpeed = 0;
+
+    private void UpdateSpeed()
+    {
+        _movementSpeed =
+            _gameConfigs.MonsterSpeed + _gameConfigs.SpeedPerSecond * Time.timeSinceLevelLoad;
+        _movementSpeed = Mathf.Clamp(_movementSpeed, 0, _gameConfigs.MaxMonsterSpeed);
+        Debug.Log(_movementSpeed);
+    }
+
+    private void OnEnable()
+    {
+        UpdateSpeed();
+        RandomizeSpeed();
+    }
+
+    private void FixedUpdate()
+    {
+        _rigidbody.velocity = _rigidbody.velocity.normalized * _movementSpeed;
+    }
 
     private void LookAtMovement()
     {
         if (_rigidbody.velocity == Vector3.zero)
             return;
+        
         transform.rotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
     }
 }

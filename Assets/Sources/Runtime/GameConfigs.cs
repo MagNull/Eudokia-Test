@@ -21,9 +21,9 @@ namespace Sources.Runtime
         
         [Header("Difficulty configs")]
         [SerializeField]
-        private float _monsterHealthPerSecond;
+        private float _healthPerSecond;
         [SerializeField]
-        private float _monsterSpeedPerSecond;
+        private float _speedPerSecond;
         [SerializeField]
         private float _intervalReductionPerSecond;
 
@@ -50,9 +50,9 @@ namespace Sources.Runtime
 
         public float OverkillCooldown => _overkillCooldown;
 
-        public float MonsterHealthPerSecond => _monsterHealthPerSecond;
+        public float HealthPerSecond => _healthPerSecond;
 
-        public float MonsterSpeedPerSecond => _monsterSpeedPerSecond;
+        public float SpeedPerSecond => _speedPerSecond;
 
         public float IntervalReductionPerSecond => _intervalReductionPerSecond;
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using Sources.Runtime.Interfaces;
-using UnityEngine;
 
 namespace Sources.Runtime
 {
@@ -11,6 +9,7 @@ namespace Sources.Runtime
         private readonly int _monsterCountLoseCondition;
         private int _playerPoints;
         private int _monstersCount;
+
 
         public Game(int monsterCountLoseCondition)
         {
@@ -23,7 +22,7 @@ namespace Sources.Runtime
             CheckLoseCondition();
         }
 
-        public void OnMonsterDestroyed(IPoolObject monsterClickable)
+        public void OnMonsterDied()
         {
             _playerPoints++;
             PointsChanged?.Invoke(_playerPoints);

@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Runtime.Utils;
 using UnityEngine;
 
 namespace Sources.Runtime
@@ -10,18 +9,12 @@ namespace Sources.Runtime
         public event Action<float, float> Used;
         [SerializeField]
         private GameConfigs _gameConfigs;
-        private Timer _timer;
-        
-        public OverkillBooster()
-        {
-            _timer = new Timer();
-        }
-        
+
         public void Use()
         {
             var monsters = GameObject.FindObjectsOfType<MonsterClickable>();
             foreach (var monster in monsters) 
-                monster.Kill();
+                monster.TakeDamage(monster.Health);
             Used?.Invoke(0, _gameConfigs.OverkillCooldown);
         }
     }

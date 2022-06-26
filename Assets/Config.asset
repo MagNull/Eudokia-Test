@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18dc2aa1724d48d096b445d40914e0d2, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  _monsterCountLoseCondition: 1
+  _monsterCountLoseCondition: 10
   _monstersHealth: 1
   _monsterSpeed: 5
   _maxMonsterSpeed: 10
-  _spawnInterval: 2
+  _spawnInterval: 1
   _minSpawnInterval: 0.2
-  _monsterHealthPerSecond: 0.1
-  _monsterSpeedPerSecond: 0.1
+  _healthPerSecond: 0.02
+  _speedPerSecond: 0.1
   _intervalReductionPerSecond: 0.05
   _freezeDuration: 3
   _freezeCooldown: 3

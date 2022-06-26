@@ -28,7 +28,7 @@ namespace Sources.Runtime
             {
                 var monsters = FindObjectsOfType<MonsterClickable>();
                 foreach (var monster in monsters) 
-                    monster.Kill();
+                    monster.Shrink();
                 spawner.StopSpawn();
             };
         }
@@ -36,7 +36,7 @@ namespace Sources.Runtime
         private void OnMonsterSpawned(MonsterClickable monster)
         {
             _game.OnMonsterSpawned();
-            monster.BecameUnused += _game.OnMonsterDestroyed;
+            monster.Died += _game.OnMonsterDied;
         }
     }
 }
