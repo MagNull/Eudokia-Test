@@ -11,13 +11,6 @@ namespace Sources.Runtime
         public event Action<float, float> Used;
         [SerializeField]
         private GameConfigs _gameConfigs;
-        private Timer _timer;
-
-        public FreezeBooster()
-        {
-            _timer = new Timer();
-        }
-
 
         public void Use()
         {

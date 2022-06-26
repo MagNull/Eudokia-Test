@@ -15,6 +15,7 @@ public class MonsterMovement : MonoBehaviour
     private float _collisionCheckCooldown = 1;
     private float _movementSpeed = 1;
 
+    private Collider[] _colliders;
     private float _lastCollisionCheck;
     private Rigidbody _rigidbody;
     private GameConfigs _gameConfigs;
@@ -24,6 +25,7 @@ public class MonsterMovement : MonoBehaviour
     {
         _gameConfigs = gameConfigs;
         _movementSpeed = gameConfigs.MonsterSpeed;
+        _colliders = GetComponents<Collider>();
         enabled = true;
     }
 
@@ -57,20 +59,26 @@ public class MonsterMovement : MonoBehaviour
             Quaternion.Euler(0, rotationAngle, 0) * collisionInfo.GetContact(0).normal;
     }
 
-    private void OnDied() => _movementSpeed = 0;
+    private void OnDied()
+    {
+        _movementSpeed = 0;
+        foreach (var collider in _colliders) 
+            collider.enabled = false;
+    }
 
     private void UpdateSpeed()
     {
         _movementSpeed =
             _gameConfigs.MonsterSpeed + _gameConfigs.SpeedPerSecond * Time.timeSinceLevelLoad;
         _movementSpeed = Mathf.Clamp(_movementSpeed, 0, _gameConfigs.MaxMonsterSpeed);
-        Debug.Log(_movementSpeed);
     }
 
     private void OnEnable()
     {
         UpdateSpeed();
         RandomizeSpeed();
+        foreach (var collider in _colliders) 
+            collider.enabled = true;
     }
 
     private void FixedUpdate()
@@ -82,7 +90,7 @@ public class MonsterMovement : MonoBehaviour
     {
         if (_rigidbody.velocity == Vector3.zero)
             return;
-        
+
         transform.rotation = Quaternion.LookRotation(_rigidbody.velocity, Vector3.up);
     }
 }

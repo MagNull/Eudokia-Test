@@ -28,8 +28,6 @@ namespace Sources.Runtime
         private GameConfigs _gameConfigs;
         private IReadonlyPlayerStats _playerStats;
 
-        private Collider _collider;
-
         public int Health => _health;
 
         [Inject]
@@ -37,7 +35,6 @@ namespace Sources.Runtime
         {
             _gameConfigs = gameConfigs;
             _health = gameConfigs.MonstersHealth;
-            _collider = GetComponent<Collider>();
             _playerStats = playerStats;
         }
 
@@ -49,13 +46,12 @@ namespace Sources.Runtime
             {
                 Disable();
                 BecameUnused?.Invoke(this);
-                BecameUnused = null;
+                Died = null;
             };
         }
 
         public void Enable()
         {
-            _collider.enabled = true;
             UpdateHealth();
             transform.DOComplete();
             transform.localScale = Vector3.zero;
@@ -68,8 +64,7 @@ namespace Sources.Runtime
             _health -= damage;
             if (_health > 0)
                 return;
-
-            _collider.enabled = false;
+            
             Died?.Invoke();
         }
 

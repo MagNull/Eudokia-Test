@@ -26,13 +26,18 @@ public class BoosterView : MonoBehaviour
         _button.interactable = false;
         _timer.Start(duration, () => OnCooldowned(coolDown),
             tick => _abilityImage.fillAmount = tick / _timer.Duration);
+        UsedEffect();
     }
 
     public void OnCooldowned(float coolDown)
     {
         _timer.Start(coolDown, () => _button.interactable = true,
             tick => _abilityImage.fillAmount = (_timer.Duration - tick) / _timer.Duration);
+        CooldownedEffect();
     }
+
+    protected virtual void UsedEffect(){}
+    protected virtual void CooldownedEffect(){}
 
     private void Update()
     {
