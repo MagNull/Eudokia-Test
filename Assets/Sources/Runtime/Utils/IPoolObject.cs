@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sources.Runtime.Interfaces
+namespace Sources.Runtime.Utils
 {
     public interface IPoolObject
     {

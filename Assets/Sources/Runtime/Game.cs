@@ -31,8 +31,11 @@ namespace Sources.Runtime
 
         private void CheckLoseCondition()
         {
-            if(_monstersCount >= _monsterCountLoseCondition)
+            if (_monstersCount >= _monsterCountLoseCondition)
+            {
+                SaveLoad.Save(_playerPoints);
                 Lost?.Invoke();
+            }
         }
     }
 }
